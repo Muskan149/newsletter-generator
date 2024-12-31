@@ -78,7 +78,7 @@ The W@CC Team 🌟
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="flex items-center justify-center space-x-2">
           <Sparkles className="text-pink-500" size={24} />
-          <h1 className="text-3xl font-bold text-gray-800">Iris: W@CC's PR Assistant</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Iris: W@CC&apos;s PR Assistant</h1>
           <Sparkles className="text-pink-500" size={24} />
         </div>
         
