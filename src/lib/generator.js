@@ -1,6 +1,6 @@
 // import { HfInference } from "@huggingface/inference"
 
-// const client = new HfInference("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")
+// const client = "hi"
 
 // let out = "";
 
