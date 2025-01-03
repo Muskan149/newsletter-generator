@@ -2,7 +2,6 @@
 
 import { HfInference } from "@huggingface/inference";
 import dotenv from "dotenv";
-import ReactMarkdown from 'react-markdown';
 
 // Load environment variables from .env file
 dotenv.config();
