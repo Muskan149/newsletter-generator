@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sparkles, Copy, Wand2, Loader2 } from 'lucide-react';
+import { generateNewsletter } from './generateNewsletter.js';
+import ReactMarkdown from 'react-markdown';
 
 const NewsletterGenerator = () => {
   const [schedule, setSchedule] = useState('');
@@ -15,46 +17,12 @@ const NewsletterGenerator = () => {
     setIsClient(true);
   }, []);
 
-  const generateNewsletter = async () => {
+  const submitClicked = async () => {
     setIsLoading(true);
-    setNewsletter(''); // Clear existing newsletter while loading
+    setNewsletter('');
 
-    // Simulate loading delay
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    const template = `
-✨ Women @ College of Computing Monthly Update ✨
-
-Hey CodeLettes! 💻 👩‍💻
-
-We hope this finds you coding and creating amazing things! Here's what's coming up:
-
-🍫️ Welcome Back Event - Hot Chocolate Social
-Thursday, January 18th, 2024 | 6:30 PM | Reserved Meeting Space
-Warm up with us and enjoy hot chocolate, sweet treats, and great company!
-
-📝 CAP Meeting
-Thursday, January 25th, 2024 | 6:30 PM | Reserved Meeting Space
-Join us for our monthly CAP meeting to discuss important club matters and plan exciting events!
-
-🔓 Escape Room Challenge
-Thursday, February 1st, 2024 | 6:30 PM | Reserved Meeting Space
-Test your problem-solving skills and teamwork in our thrilling escape room challenge!
-
-🎲 Game Night
-Thursday, February 8th, 2024 | 6:30 PM | Reserved Meeting Space
-Unwind and have fun with friends at our game night, featuring board games and snacks!
-
-🎨 Visit to High Museum of Art
-Sunday, February 11th, 2024 | 12:00 PM | High Museum of Art
-Explore the world of art and culture with us on a special visit to the High Museum of Art.
-
-Remember to join our Discord for real-time updates and discussions!
-
-Stay awesome and keep coding! 
-The W@CC Team 🌟
-    `;
-    
+    const template = await generateNewsletter(schedule);
+    console.log(template);
     setNewsletter(template);
     setIsLoading(false);
   };
@@ -70,7 +38,7 @@ The W@CC Team 🌟
   };
 
   if (!isClient) {
-    return null; // or a loading spinner if you prefer
+    return null;
   }
 
   return (
@@ -95,7 +63,7 @@ The W@CC Team 🌟
             />
             
             <button
-              onClick={generateNewsletter}
+              onClick={submitClicked}
               disabled={isLoading}
               className="mt-4 w-full bg-gradient-to-r from-pink-400 to-purple-400 text-white py-2 px-4 rounded-lg hover:from-pink-500 hover:to-purple-500 transition-all flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -120,13 +88,13 @@ The W@CC Team 🌟
               <CardTitle className="text-lg text-gray-700">Generated Newsletter</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="whitespace-pre-wrap bg-white p-4 rounded-lg border border-pink-200 min-h-48">
+              <div className="prose prose-pink max-w-none bg-white p-4 rounded-lg border border-pink-200 min-h-48">
                 {isLoading ? (
                   <div className="flex items-center justify-center h-48">
                     <Loader2 size={32} className="animate-spin text-pink-500" />
                   </div>
                 ) : (
-                  newsletter
+                  <ReactMarkdown>{newsletter}</ReactMarkdown>
                 )}
               </div>
               
