@@ -10,6 +10,7 @@ dotenv.config();
 export async function generateNewsletter(schedule) {
 
   console.log("started")
+  alert("LATEST")
   // const hfToken = process.env.HF_TOKEN; // Ensure the token is in your .env file as HF_TOKEN
 
   const hfToken = "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";
